@@ -53,7 +53,8 @@ pipelines:
           dir: /workspace/source
           name: verify-preinstall
         - args:
-          - boot
+          - step
+          - create
           - helmfile
           command: jxl
           dir: /workspace/source
