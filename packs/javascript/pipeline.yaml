@@ -14,10 +14,10 @@ pipelines:
         steps:
         - sh: make preview
           name: make-preview
-          image: gcr.io/jenkinsxio-labs-private/jxl
+          image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
         - sh: jx preview --app $APP_NAME --dir ../..
           name: jx-preview
-          image: gcr.io/jenkinsxio-labs-private/jxl
+          image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
 
   release:
     build:
@@ -31,11 +31,11 @@ pipelines:
         steps:
         - sh: jx step changelog --batch-mode --version v\$(cat ../../VERSION)
           name: changelog
-          image: gcr.io/jenkinsxio-labs-private/jxl
+          image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
         - comment: release the helm chart
           sh: jx step helm release
           name: helm-release
-          image: gcr.io/jenkinsxio-labs-private/jxl
+          image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
         - comment: promote through all 'Auto' promotion Environments
           sh: jx-alpha-promote -b --all-auto --timeout 1h
           name: jx-promote
@@ -44,15 +44,15 @@ pipelines:
       steps:
       - sh: jx step next-version --filename package.json
         name: next-version
-        image: gcr.io/jenkinsxio-labs-private/jxl
+        image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
         comment: so we can retrieve the version in later steps
       - sh: jx step tag --version \$(cat VERSION) --no-apply
-        image: gcr.io/jenkinsxio-labs-private/jxl
+        image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
         name: update-version
       - sh: "jx-gitops helm template"
         name: helm-template
         image: gcr.io/jenkinsxio-labs-private/jx-gitops
         comment: lets release the versioned kubernetes resources for consumption via kubectl/kpt/kustomize
       - sh: jx step tag --version \$(cat VERSION)
-        image: gcr.io/jenkinsxio-labs-private/jxl
+        image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
         name: tag-version
