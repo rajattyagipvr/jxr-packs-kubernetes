@@ -20,4 +20,20 @@ pipelines:
       - sh: /kaniko/executor --cache=true --cache-dir=/workspace --context=/workspace/source --dockerfile=/workspace/source/Dockerfile --destination=$DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME:$VERSION --cache-repo=$DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/cache
         name: container-build
         image: gcr.io/kaniko-project/executor
+    setVersion:
+      steps:
+      - sh: jx step next-version --use-git-tag-only
+        name: next-version
+        image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
+        comment: so we can retrieve the version in later steps
+      - sh: jx step tag --version \$(cat VERSION) --no-apply
+        image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
+        name: update-version
+      - sh: "jx-gitops helm template"
+        name: helm-template
+        image: gcr.io/jenkinsxio-labs-private/jx-gitops
+        comment: lets release the versioned kubernetes resources for consumption via kubectl/kpt/kustomize
+      - sh: jx step tag --version \$(cat VERSION)
+        image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
+        name: tag-version
 
