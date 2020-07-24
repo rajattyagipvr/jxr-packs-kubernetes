@@ -65,7 +65,7 @@ pipelines:
           dir: /workspace/source/system
           name: helmfile-system-diff
         - args:
-          - sync
+          - apply
           command: helmfile
           dir: /workspace/source/system
           name: helmfile-system
@@ -92,7 +92,7 @@ pipelines:
           dir: /workspace/source/apps
           name: helmfile-apps-diff
         - args:
-          - sync
+          - apply
           command: helmfile
           dir: /workspace/source/apps
           name: helmfile-apps
