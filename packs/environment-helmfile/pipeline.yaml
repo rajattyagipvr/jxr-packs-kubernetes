@@ -190,7 +190,8 @@ pipelines:
           dir: /workspace/source
           name: validate-git
         - args:
-          - boot
+          - step
+          - create
           - helmfile
           command: jxl
           dir: /workspace/source
