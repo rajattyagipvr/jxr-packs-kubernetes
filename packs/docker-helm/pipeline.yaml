@@ -37,15 +37,15 @@ pipelines:
         steps:
         - sh: jx step changelog --version v\$(cat ../../VERSION)
           name: changelog
-          image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
+          image: gcr.io/jenkinsxio-labs-private/jxl
         - comment: Let's release the helm chart
           sh: jx step helm release
-          image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
+          image: gcr.io/jenkinsxio-labs-private/jxl
           name: helm-release
         - comment: Let's promote through all 'Auto' promotion Environments
           sh: jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)
           name: jx-promote
-          image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
+          image: gcr.io/jenkinsxio-labs-private/jxl
 
 
 
