@@ -35,12 +35,8 @@ pipelines:
           sh: jx step helm release
           image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
         - comment: promote through all 'Auto' promotion Environments
-<<<<<<< HEAD
           sh: jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)
-          image: gcr.io/jenkinsxio-labs-private/jxl
-=======
-          sh: jx-alpha-promote -b --all-auto --timeout 1h
-          image: gcr.io/jenkinsxio-labs-private/jx-promote
+          image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
     setVersion:
       steps:
       - sh: jx step next-version --use-git-tag-only
@@ -50,11 +46,10 @@ pipelines:
       - sh: jx step tag --version \$(cat VERSION) --no-apply
         image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
         name: update-version
-      - sh: "jx-gitops helm template"
+      - sh: jx step helm release
         name: helm-template
-        image: gcr.io/jenkinsxio-labs-private/jx-gitops
+        image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
         comment: lets release the versioned kubernetes resources for consumption via kubectl/kpt/kustomize
       - sh: jx step tag --version \$(cat VERSION)
         image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
         name: tag-version
->>>>>>> 6c49caa... Updated buildpacks to include updated image of jxl across all pipelines

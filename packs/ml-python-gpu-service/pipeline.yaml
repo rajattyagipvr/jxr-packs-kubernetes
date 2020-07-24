@@ -64,7 +64,7 @@ pipelines:
           image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
         - comment: promote through all 'Auto' promotion Environments
           sh: jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)
-          image: gcr.io/jenkinsxio-labs-private/jxl
+          image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
   post:
     steps:
     - groovy: always

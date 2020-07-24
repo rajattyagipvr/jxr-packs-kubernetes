@@ -189,11 +189,12 @@ pipelines:
           command: helmfile
           dir: /workspace/source/system
           name: lint-helmfile-system
-        - args:
-          - lint
-          command: helmfile
-          dir: /workspace/source/apps
-          name: lint-helmfile-apps
+        # rajat commented as lint does not allow for helm-x kustomize used in apps/repositories
+        # - args:
+        #   - lint
+        #   command: helmfile
+        #   dir: /workspace/source/apps
+        #   name: lint-helmfile-apps
 
 
 
