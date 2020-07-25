@@ -1,6 +1,6 @@
 agent:
   label: jenkins-machine-learning
-  container: machine-learning
+  container: gcr.io/jenkinsxio/builder-machine-learning
 pipelines:
   pullRequest:
     build:
