@@ -1,6 +1,6 @@
 agent:
   label: jenkins-go
-  container: go
+  container: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/builder-go
 pipelines:
   pullRequest:
     build:

@@ -1,6 +1,6 @@
 agent:
   label: builder-go
-  container: go
+  container: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/builder-go
 env:
   - name: GIT_COMMITTER_EMAIL
     value: jenkins-x@googlegroups.com

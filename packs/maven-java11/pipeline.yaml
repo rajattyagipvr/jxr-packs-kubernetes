@@ -3,4 +3,4 @@ extends:
 agent:
   label: jenkins-maven-java11
   image: maven-java11
-  container: maven
+  container: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/builder-maven
