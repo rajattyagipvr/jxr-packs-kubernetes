@@ -2,4 +2,4 @@ extends:
   file: ../docker/pipeline.yaml
 agent:
   label: jenkins-maven
-  container: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/builder-maven
+  container: maven

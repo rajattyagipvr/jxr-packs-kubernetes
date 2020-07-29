@@ -2,4 +2,4 @@ extends:
   file: ../maven/pipeline.yaml
 agent:
   label: jenkins-maven-graalvm
-  container: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/builder-maven-graalvm
+  container: maven-graalvm
