@@ -61,13 +61,15 @@ pipelines:
           command: jxl
           dir: /workspace/source
           name: generate-helmfile
+        ## rajat helm-diff crd issue
+        # - args:
+        #   - diff
+        #   command: helmfile
+        #   dir: /workspace/source/system
+        #   name: helmfile-system-diff
+        ## changed back apply to sync
         - args:
-          - diff
-          command: helmfile
-          dir: /workspace/source/system
-          name: helmfile-system-diff
-        - args:
-          - apply
+          - sync
           command: helmfile
           dir: /workspace/source/system
           name: helmfile-system
@@ -88,16 +90,24 @@ pipelines:
           dir: /workspace/source
           name: helm-label-repositories
           image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
+        ## rajat commented as helm-diff does not work with crds not created
+        ## need disablevalidation changes
+        # - args:
+        #   - diff
+        #   command: helmfile
+        #   dir: /workspace/source/apps
+        #   name: helmfile-apps-diff
+        ## while apply is better faster but uses helm-diff same issue
+        # - args:
+        #   - apply
+        #   command: helmfile
+        #   dir: /workspace/source/apps
+        #   name: helmfile-apps
         - args:
-          - diff
+          - sync
           command: helmfile
           dir: /workspace/source/apps
-          name: helmfile-apps-diff
-        - args:
-          - apply
-          command: helmfile
-          dir: /workspace/source/apps
-          name: helmfile-apps
+          name: helmfile-apps  
         - args:
           - step
           - git
