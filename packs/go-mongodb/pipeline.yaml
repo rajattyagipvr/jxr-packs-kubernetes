@@ -16,7 +16,7 @@ pipelines:
           name: make-preview
           image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
         - sh: jx preview --app $APP_NAME --dir ../..
-          name: make-preview
+          name: jx-preview
           image: 702769831180.dkr.ecr.ap-south-1.amazonaws.com/702769831180/jxl
 
   release:
